@@ -17,7 +17,15 @@ class RoomsController < ApplicationController
     end
   end
 
-
+  def destroy
+    room = Room.find(params[:id])
+    room.destroy
+    redirect_to root_path
+  end
+  #どのをチャットルームを削除するのかを特定する場合は、Room.find.params[:id]を使用して、削除したいチャットルームの情報を取得します。
+# destroyアクションは、削除するだけなのでビューの表示は必要はありません。
+# そのため、インスタンス変数ではなく変数としてroomを定義し、destroyメソッドを使用します。
+# destroyメソッドが実行されたら、root（roomsのindex）にリダイレクトする記述をします。
 
 
   private
