@@ -9,5 +9,5 @@ class User < ApplicationRecord
   # つまり、ユーザー登録時に「name」を空欄にして登録しようとすると、エラーが発生します。       
   has_many :room_users
   has_many :rooms,through: :room_users
-
+  has_many :messages #1人のユーザーは、複数のメッセージを送信できます。つまり、usersテーブルに対して、messagesテーブルは、1対多の関係になります。
 end
