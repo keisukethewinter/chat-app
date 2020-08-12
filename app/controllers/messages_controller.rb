@@ -5,6 +5,12 @@ class MessagesController < ApplicationController
     #paramsに含まれているroom_idを代入します。
 # 紐解いて説明すると、直前の問題にあった通りルーティングをネストしているため/rooms/:room_id/messagesといったパスになります。
 # パスにroom_idが含まれているため、paramsというハッシュオブジェクトの中に、room_idという値が存在しています。そのため、params[:room_id]と記述することでroom_idを取得できます。
+    @messages = @room.messages.includes(:user)
+    #チャットルームに紐付いている全てのメッセージ（@room.messages）を@messagesと定義します。
+# そして、一覧画面で表示するメッセージ情報には、ユーザー情報も紐付いて表示されます。
+# この場合、メッセージに紐付くユーザー情報の取得に、メッセージの数と同じ回数のアクセスが必要になるので、N+1問題が発生します。
+# その場合は、includesメソッドを使用して、解消しましょう。
+# 全てのメッセージ情報に紐づくユーザー情報を、includes(:user)と記述をすることにより、ユーザー情報を1度のアクセスでまとめて取得することができます。
   end
 
   def create
